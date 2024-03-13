@@ -1,25 +1,29 @@
-interface Teacher {
-  firstName: string;
-  lastName: string;
-  readonly fullTimeEmployee: boolean;
-  yearsOfExperience?: number;
-  readonly location: string;
-  [key: string]: any;
+// Interface describing the constructor of StudentClass
+interface StudentClassConstructor {
+  new (firstName: string, lastName: string): StudentClass;
 }
 
-// interface named Directors that extends Teacher
-interface Directors extends Teacher {
-  numberOfReports: number;
+// Interface describing the StudentClass
+interface StudentClass {
+  workOnHomework(): string;
+  displayName(): string;
 }
 
-// Define the interface for the printTeacher function
-interface printTeacherFunction {
-  (firstName: string, lastName: string): string;
-}
+// Implementation of the StudentClass
+class StudentClass implements StudentClass {
+  private firstName: string;
+  private lastName: string;
 
-// Implement the printTeacher function
-const printTeacher: printTeacherFunction = (firstName, lastName) => {
-  const firstLetter = firstName.charAt(0).toUpperCase();
-  const fullName = `${firstLetter}. ${lastName}`;
-  return fullName;
-};
+  constructor(firstName: string, lastName: string) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+  }
+
+  workOnHomework(): string {
+      return "Currently working";
+  }
+
+  displayName(): string {
+      return this.firstName;
+  }
+}
