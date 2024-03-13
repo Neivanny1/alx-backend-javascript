@@ -31,16 +31,25 @@ var Teacher = /** @class */ (function () {
 // Define createEmployee function
 function createEmployee(salary) {
     if (typeof salary === "number" && salary < 500) {
-        return "Teacher";
+        return new Teacher();
     }
     else {
-        return "Director";
+        return new Director();
     }
 }
-// Test createEmployee function
-// Output: Teacher
-console.log(createEmployee(200));
-// Output: Director
-console.log(createEmployee(1000));
-// Output: Director
-console.log(createEmployee('$500'));
+// Define isDirector function
+function isDirector(employee) {
+    return employee.workDirectorTasks !== undefined;
+}
+// Define executeWork function
+function executeWork(employee) {
+    if (isDirector(employee)) {
+        return employee.workDirectorTasks();
+    }
+    else {
+        return employee.workTeacherTasks();
+    }
+}
+// Test executeWork function
+console.log(executeWork(createEmployee(200)));
+console.log(executeWork(createEmployee(1000)));
