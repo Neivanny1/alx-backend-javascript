@@ -64,7 +64,24 @@ function executeWork(employee: Director | Teacher): string {
     return employee.workTeacherTasks();
   }
 }
+// Define String literal type named Subjects
+type Subjects = 'Math' | 'History';
+
+// Define teachClass function
+function teachClass(todayClass: Subjects): string {
+  if (todayClass === 'Math') {
+    return 'Teaching Math';
+  } else if (todayClass === 'History') {
+    return 'Teaching History';
+  } else {
+    return 'Invalid class';
+  }
+}
+
+// Test teachClass function
+console.log(teachClass('Math')); // Output: Teaching Math
+console.log(teachClass('History')); // Output: Teaching History
 
 // Test executeWork function
-console.log(executeWork(createEmployee(200)));
-console.log(executeWork(createEmployee(1000)));
+// console.log(executeWork(createEmployee(200)));
+// console.log(executeWork(createEmployee(1000)));
