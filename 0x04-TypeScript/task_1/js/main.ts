@@ -6,3 +6,8 @@ interface Teacher {
   readonly location: string;
   [key: string]: any;
 }
+
+// interface named Directors that extends Teacher
+interface Directors extends Teacher {
+  numberOfReports: number;
+}
