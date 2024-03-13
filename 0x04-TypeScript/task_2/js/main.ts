@@ -78,10 +78,10 @@ function teachClass(todayClass: Subjects): string {
   }
 }
 
-// Test teachClass function
+// To test teachClass function uncomment below
 console.log(teachClass('Math')); // Output: Teaching Math
 console.log(teachClass('History')); // Output: Teaching History
 
-// Test executeWork function
+// To test executeWork function uncomment below
 // console.log(executeWork(createEmployee(200)));
 // console.log(executeWork(createEmployee(1000)));
