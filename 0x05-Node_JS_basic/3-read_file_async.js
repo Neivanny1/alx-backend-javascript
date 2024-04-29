@@ -1,7 +1,7 @@
 // Reading a file asynchronously with Node JS
 const fs = require('fs');
 
-module.exports = function countStudents(path) {
+module.exports = function countStudents (path) {
   return new Promise((resolve, reject) => {
     fs.readFile(path, { encoding: 'utf-8' }, (err, data) => {
       if (err) return reject(Error('Cannot load the database'));
