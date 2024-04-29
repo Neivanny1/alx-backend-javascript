@@ -11,10 +11,8 @@ module.exports = function countStudents (path) {
     const header = lines.shift().split(',');
     const idxFn = header.findIndex((ele) => ele === 'firstname');
     const idxFd = header.findIndex((ele) => ele === 'field');
-
     const fields = {};
     const students = {};
-
     lines.forEach((line) => {
       const list = line.split(',');
       if (!fields[list[idxFd]]) fields[list[idxFd]] = 0;
@@ -22,7 +20,6 @@ module.exports = function countStudents (path) {
       if (!students[list[idxFd]]) students[list[idxFd]] = '';
       students[list[idxFd]] += students[list[idxFd]] ? `, ${list[idxFn]}` : list[idxFn];
     });
-
     console.log(`Number of students: ${lines.length}`);
     for (const key in fields) {
       if (Object.hasOwnProperty.call(fields, key)) {
