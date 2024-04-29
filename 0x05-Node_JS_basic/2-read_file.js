@@ -7,42 +7,30 @@ const fs = require('fs');
 module.exports = function countStudents (path) {
   try {
     const data = fs.readFileSync(path, { encoding: 'utf-8' });
-    const lines = data.trim().split('\n');
+    const lines = data.split('\n').filter(line => line.trim() !== '');
+    const header = lines.shift().split(',');
+    const idxFn = header.findIndex((ele) => ele === 'firstname');
+    const idxFd = header.findIndex((ele) => ele === 'field');
 
-    if (lines.length === 0) {
-      console.log('Number of students: 0');
-      return;
-    }
-
-    const header = lines[0].split(',');
-    const idxFn = header.indexOf('firstname');
-    const idxFd = header.indexOf('field');
     const fields = {};
     const students = {};
 
-    lines.slice(1).forEach(line => {
+    lines.forEach((line) => {
       const list = line.split(',');
-      if (list.length >= 2) {
-        const field = list[idxFd];
-        const firstName = list[idxFn];
-
-        if (!fields[field]) fields[field] = 0;
-        fields[field]++;
-
-        if (!students[field]) students[field] = [];
-        students[field].push(firstName);
-      }
+      if (!fields[list[idxFd]]) fields[list[idxFd]] = 0;
+      fields[list[idxFd]] += 1;
+      if (!students[list[idxFd]]) students[list[idxFd]] = '';
+      students[list[idxFd]] += students[list[idxFd]] ? `, ${list[idxFn]}` : list[idxFn];
     });
 
-    console.log(`Number of students: ${lines.length - 1}`);
+    console.log(`Number of students: ${lines.length}`);
     for (const key in fields) {
       if (Object.hasOwnProperty.call(fields, key)) {
         const element = fields[key];
-        console.log(`Number of students in ${key}: ${element}. List: ${students[key].join(', ')}`);
+        console.log(`Number of students in ${key}: ${element}. List: ${students[key]}`);
       }
     }
   } catch (error) {
-    console.error('Cannot load the database');
-    process.exit(1);
+    throw new Error('Cannot load the database');
   }
 };
